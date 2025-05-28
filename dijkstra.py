@@ -51,6 +51,7 @@ class Dijkstra:
         print(f"Shortest path : {vertex.min_distance}")
         vertex_list = []
         actual_vertex = vertex
+
         while actual_vertex is not None:
             # print(actual_vertex.name, end = " ")
             vertex_list.append(actual_vertex)

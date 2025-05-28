@@ -2,7 +2,7 @@ import pytest
 
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from dijkstra import Node, Dijkstra
+from dijkstra_new_implement import Node, Dijkstra
 
 
 
@@ -25,16 +25,16 @@ def basic_graph():
 def test_shortest_distances(basic_graph):
     nodeA, nodeB, nodeC,  nodeD = basic_graph
     dijkstra = Dijkstra()
-    dijkstra.calculate(nodeA)
+    assert dijkstra.calculate_shortest_path(nodeA,nodeB)[1] == 1
+    assert dijkstra.calculate_shortest_path(nodeC,nodeD)[1] == 3
+    assert dijkstra.calculate_shortest_path(nodeA,nodeD)[1] == 6
 
-    assert nodeA.min_distance == 0
-    assert nodeB.min_distance == 1
-    assert nodeC.min_distance == 3   
-    assert nodeD.min_distance == 6   
+   
+    
     
 def test_single_node_graph():
     nodeA = Node('A')
     dijkstra = Dijkstra()
-    dijkstra.calculate(nodeA)
-    assert nodeA.min_distance == 0
-    assert dijkstra.get_shortest_path(nodeA) == ['A']
+    min_distance = dijkstra.calculate_shortest_path(nodeA,nodeA)[1]
+    assert min_distance == 0
+    assert dijkstra.calculate_shortest_path(nodeA,nodeA)[0] == ['A']
